@@ -28,10 +28,11 @@ public class ExaminerServiceImpl implements ExaminerService{
             return randomQuestions = questionService.getAll();
         }
         while (randomQuestions.size() < amount) {
-            if (randomQuestions.contains(questionService.getRandomQuestion())) {
+            Question randomQuestion = questionService.getRandomQuestion();
+            if (randomQuestions.contains(randomQuestion)) {
                 continue;
             }
-            randomQuestions.add(questionService.getRandomQuestion());
+            randomQuestions.add(randomQuestion);
         }
         return randomQuestions;
     }

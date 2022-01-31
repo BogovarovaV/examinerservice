@@ -9,7 +9,7 @@ import pro.sky.java.course2.examinerservice.service.ExaminerServiceImpl;
 import java.util.Collection;
 
 @RestController
-@RequestMapping("/exam/get")
+@RequestMapping("/get")
 public class ExamController {
 
     private final ExaminerServiceImpl examinerService;

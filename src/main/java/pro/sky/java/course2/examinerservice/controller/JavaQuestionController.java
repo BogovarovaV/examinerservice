@@ -8,9 +8,10 @@ import pro.sky.java.course2.examinerservice.domain.Question;
 import pro.sky.java.course2.examinerservice.service.JavaQuestionService;
 
 import java.util.Collection;
+import java.util.Set;
 
 @RestController
-@RequestMapping("/exam/java")
+@RequestMapping("/java")
 public class JavaQuestionController {
 
     private final JavaQuestionService javaQuestionService;
@@ -20,26 +21,26 @@ public class JavaQuestionController {
     }
 
     @GetMapping
-    public Collection<Question> getAllQuestions() {
+    public Set<Question> getAllQuestions() {
         return javaQuestionService.getAll();
     }
 
     @GetMapping("/add")
-    public String addQuestion(@RequestParam String q, @RequestParam String a) {
-        javaQuestionService.add(q, a);
-        return "Вопрос [" + q + "] с ответом [" + a + "] успешно добавлены.";
+    public String addQuestion(@RequestParam String question, @RequestParam String answer) {
+        javaQuestionService.add(question, answer);
+        return "Вопрос [" + question + "] с ответом [" + answer + "] успешно добавлены.";
     }
 
     @GetMapping("/remove")
-    public String removeQuestion(@RequestParam String q, @RequestParam String a) {
-        javaQuestionService.remove(new Question(q, a));
-        return "Вопрос [" + q + "] с ответом [" + a + "] успешно удалены.";
+    public String removeQuestion(@RequestParam String question, @RequestParam String answer) {
+        javaQuestionService.remove(new Question(question, answer));
+        return "Вопрос [" + question + "] с ответом [" + answer + "] успешно удалены.";
     }
 
     @GetMapping("/find")
-    public String findQuestion(@RequestParam String q, @RequestParam String a) {
-        javaQuestionService.find(new Question(q, a));
-        return "Вопрос [" + q + "] с ответом [" + a + "] найден.";
+    public String findQuestion(@RequestParam String question, @RequestParam String answer) {
+        javaQuestionService.find(new Question(question, answer));
+        return "Вопрос [" + question + "] с ответом [" + answer + "] найден.";
     }
 
 }

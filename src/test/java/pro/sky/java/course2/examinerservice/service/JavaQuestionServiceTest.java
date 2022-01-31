@@ -41,9 +41,7 @@ class JavaQuestionServiceTest {
 
     @Test
     void shouldAddQuestionAndAnswer() {
-        out.add(QUESTION_1, ANSWER_1);
-        Question actualQuestion = new Question(QUESTION_1, ANSWER_1);
-        assertEquals(questionForTest, out.find(actualQuestion));
+        assertEquals(questionForTest, out.add(QUESTION_1, ANSWER_1));
     }
 
     @ParameterizedTest
@@ -64,6 +62,12 @@ class JavaQuestionServiceTest {
         Question actualQuestion = new Question(QUESTION_1, ANSWER_1);
         out.add(questionForTest);
         assertEquals(questionForTest, out.find(actualQuestion));
+    }
+
+    @Test
+    void shouldThrowQuestionExistsLikeObjectException() {
+        assertThrows(QuestionExistsException.class,
+                ()-> out.add(questionForTest5));
     }
 
     @Test
@@ -95,7 +99,7 @@ class JavaQuestionServiceTest {
 
     @Test
     void shouldThrowQuestionCollectionIsEmptyException() {
-        out.getAll().clear();
+        out.remove(questionForTest5);
         assertThrows(QuestionCollectionIsEmptyException.class,
                 out::getAll);
     }

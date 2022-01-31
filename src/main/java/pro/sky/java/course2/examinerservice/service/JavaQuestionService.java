@@ -18,7 +18,7 @@ public class JavaQuestionService implements QuestionService{
 
     @Override
     public Question add(String question, String answer) {
-        if (StringUtils.isEmpty(question) || StringUtils.isEmpty(answer)) {
+        if (!StringUtils.hasLength(question) || !StringUtils.hasLength(answer)) {
             throw new QuestionOrAnswerIsNullException();
         }
         Question newQuestion = new Question(question, answer);
@@ -59,11 +59,11 @@ public class JavaQuestionService implements QuestionService{
     }
 
     @Override
-    public Collection<Question> getAll() {
+    public Set<Question> getAll() {
         if (questions.isEmpty()) {
             throw new QuestionCollectionIsEmptyException();
         }
-        return questions;
+        return Set.copyOf(questions);
     }
 
     @Override

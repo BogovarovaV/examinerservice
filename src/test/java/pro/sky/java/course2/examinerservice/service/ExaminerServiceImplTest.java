@@ -34,7 +34,7 @@ class ExaminerServiceImplTest {
     private final Question question3 = new Question(QUESTION_3, ANSWER_3);
     private final Question question4 = new Question(QUESTION_4, ANSWER_4);
     private final Question question5 = new Question(QUESTION_5, ANSWER_5);
-    private final Set<Question> questionsForTest = new HashSet<>();
+    private Set<Question> questionsForTest = new HashSet<>();
 
     public static Stream<Arguments> provideParamsForGetQuestionsTest() {
         return Stream.of(Arguments.of(NEGATIVE_AMOUNT),
@@ -62,5 +62,11 @@ class ExaminerServiceImplTest {
     @MethodSource("provideParamsForGetQuestionsTest")
     void shouldThrowWrongQuestionAmountException(int amount) {
         assertThrows(WrongQuestionAmountException.class, ()->out.getQuestions(amount));
+    }
+
+    @Test
+    void shouldNotAddDuplicateQuestion() {
+        questionsForTest = javaQuestionServiceMock.getAll();
+        assertEquals(questionsForTest, out.getQuestions(RIGHT_AMOUNT));
     }
 }
